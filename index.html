@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-6</title>
+    <!--daisy ui-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.3.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <!--Tailwind css-->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#FFF]">
+    <nav class="mt-10 mx-5 flex gap-10 ">
+        <div class="navbar bg-base-100">
+            <div class="navbar-start">
+              <div class="dropdown flex gap-4 mr-5">
+              
+                 <img src="img.svg" alt="">
+                 <div class="flex font-bold text-2xl gap-2">
+                    <span class="text-[#FF1F3D]">PH</span>
+                    <P>Tube</P>
+                 </div>
+                 
+              </div>
+            </div>
+            <div class="navbar-center ml-7">
+              <a id="sort" onclick="sortView()" class="btn btn-ghost normal-case text-xl bg-slate-200">Sort by view</a>
+            </div>
+            <div class="navbar-end">
+              <button id="btn" class="bg-[#FF1F3D] text-white px-5 py-2 rounded-lg text-lg mr-4 ml-3">Blog</button>
+            </div>
+          </div>
+    </nav>
+
+     <hr class="mt-7 mx-5">
+
+     <main>
+      <div class="flex  justify-center items-center mt-10  font-bold text-xl">
+        <div id="tab" class="tabs flex gap-5 mx-auto text-center items-center justify-center ">
+          
+        </div>
+       
+      </div>
+      <div class="hidden mx-auto my-auto text-center mt-24" id="drowing">
+        <img src="drowing.svg" alt="" class="flex items-center justify-center ml-[700px]">
+        <h3 class="mt-5 text-2xl font-bold">
+          Oops!! Sorry, There is no content here
+        </h3>
+      </div>
+
+    
+        
+        <div id="card-container" class=" my-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-y-7 lg:ml-20 md:ml-24 sm:ml-24 ml-16
+          ">
+      
+        </div>
+       
+      
+    </main>
+
+ <script src="script.js"></script>
+</body>
+</html>
