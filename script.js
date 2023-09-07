@@ -1,5 +1,5 @@
 
-let fetchTools = []
+let currentData;
 const handleCatagory = async (allData) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/videos/categories`)
     const data = await response.json()
@@ -8,33 +8,46 @@ const handleCatagory = async (allData) => {
   
      data.data.forEach(item => {
         const div = document.createElement('div')
-        div.innerHTML =` <a onclick = "handleLoad('${item.category_id}')" class="tab bg-gray-300 hover:bg-red-600 
+        div.innerHTML =` <a onclick = "clickDataGet('${item.category_id}')" class="tab bg-gray-300 hover:bg-red-600 
          hover:text-white rounded-md">${item.category}</a> ` 
         tab.appendChild(div) 
  });
 
 }
 
-const handleLoad = async (category_id) => {
-     let allData
-    const response = await fetch(`https://openapi.programming-hero.com/api/videos/category/${category_id}`)
-    const data = await response.json()
+const clickDataGet = async(categoryId)=>{
+    const res = await fetch (`https://openapi.programming-hero.com/api/videos/category/${categoryId}`)
+    const data = await res.json() 
+    const allData =data.data
+    currentData = allData
+    handleLoad(allData)
+}
+
+    const sortView= ()=>{
+        const shortedData = currentData.sort((a,b) =>{
+            const viewA = parseInt(a.others.views.slice(0, -1) * 1000)
+            const viewB = parseInt(b.others.views.slice(0, -1) * 1000)
     
+            return viewB - viewA
+           
+        })
+    handleLoad(shortedData)
+    
+    }
+    
+    const handleLoad = (allData)=>{
     const card= document.getElementById('card-container')
     card.innerHTML = " "
-
     const showContainer = document.getElementById('drowing')
-    if(data.data.length === 0) {
+    if(allData.length === 0) {
      showContainer.classList.remove("hidden")
     }
     else{
         showContainer.classList.add('hidden')
     }
 
-    fetchTools = allData
-    handleCatagory(allData)
- 
-    data.data.forEach((items) => {
+    allData.forEach((items) => {
+        console.log(allData)
         const time = parseInt(items.others.posted_date)
         const hour = Math.floor(time/3600)
         const rest1 = time - (hour*3600)
@@ -71,24 +84,10 @@ const handleLoad = async (category_id) => {
  })
 }
 
-const sortView =()=>{
-    const sortedData = fetchTools.sort((a,b) =>{
-        const viewA = parseInt(a.others.views.slice(0, -1) * 1000)
-        const viewB = parseInt(a.others.views.slice(0, -1) * 1000)
-
-        return viewA - viewB
-       
-    })
-handleCatagory(sortedData)
-console.log(viewA) 
-}
-
-
-handleLoad("1000")
+ clickDataGet('1000')
 handleCatagory()
 
 const result = document.getElementById("btn")
 result.addEventListener("click",function(){
     window.location.href = "answer.html"
 })
-
